@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- This is a secure form submitting comments. It has client-side protections and is connected to the server-side filter. This form is secure from stored XSS. -->
+<html>
+<head>
+<title> Secure Submit Comment </title>
+<link rel="stylesheet" href="mystyles.css">
+
+
+<script>
+    //Basic client side validation. The code checks user input for blank parameters and common JavaScript character before sending HTTP packet to server.
+    function validateForm(){
+      var x = document.forms["myForm"]["comment"].value;
+      if (x ==""){
+        alert("Please enter a search term")
+        return false;
+      }
+      else if(x.includes('<')){
+        alert("Only enter alphanumeric characters")
+        return false;
+      }
+      else if(x.includes('>')){
+        alert("Only enter alphanumeric characters")
+        return false;
+      }
+      else if(x.includes('(')){
+        alert("Only enter alphanumeric characters")
+        return false;
+      }
+      else if(x.includes(')')){
+        alert("Only enter alphanumeric characters")
+        return false;
+      }
+      else if(x.includes(';')){
+        alert("Only enter alphanumeric characters")
+        return false;
+      }
+    }
+</script>
+</head>
+
+<!-- Header -->
+<body style = "background-color: rgb(224, 247, 224)">
+<div style = "text-align: center;">
+<h1> Secure Comment Submission</h1>
+<div>
+    <!--HTTP form for entering comments, runs client side validation before sending packet to server-->
+        <form name="myForm" action=/securecommentrecieved onsubmit="return validateForm()" method="GET">
+            <input type="text" id="comment" name="comment" placeholder="Enter your comment">
+            <input type="submit" value="Submit">
+    </form>
+</div>
+</div>
+</body>
+</html>
